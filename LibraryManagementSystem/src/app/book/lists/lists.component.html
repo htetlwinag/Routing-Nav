@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div class="container-fluid mt-5">
+  <div class="card card-body">
+    <div class="row col-lg-12 col-sm-12 col-md-12">
+      <table  class="display table table-striped table-bordered table-hover" style="width:100%">
+        <thead class="bg-warning text-indigo">
+        <tr>
+          <th class="text-center">ID</th>
+<!--          <th>categoryId</th>-->
+          <th class="text-center">စာအုပ်အမည်</th>
+          <th class="text-center">စာရေးဆရာအမည်</th>
+          <th class="text-center">စာအုပ်အကြိမ်ရေ</th>
+          <th class="text-center">စျေးနှုန်း</th>
+          <th class="text-center">ISBN</th>
+<!--          <th class="text-center">IMG URl</th>-->
+          <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let b of resData">
+          <td class="text-center">{{b.id}}</td>
+<!--          <td>{{b.categoryId}}</td>-->
+          <td >{{b.name}}</td>
+          <td >{{b.author}}</td>
+          <td class="text-center">{{b.edition}}</td>
+          <td class="text-center">{{b.price}}</td>
+          <td class="text-center">{{b.isbn}}</td>
+<!--          <td>{{b.imgUrl}}</td>-->
+          <td>
+            &nbsp; &nbsp;
+            <a class="btn btn-outline-success btn-sm" (click)="open(content)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp;
+            <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, b)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp;
+            <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, b.id)"><i class="fa fa-trash text-danger"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--  detail model-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <span class="text-warning"><h5 class="modal-title" id="modal-basic-title">Details Book Info</h5></span>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <div class="input-group">
+          <input id="firstname" class="form-control" >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+<!--  end modal-->
+<!--  delete model-->
+<ng-template #close let-modal class="modal-sm fade">
+  <div class="modal-header">
+    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
+  </div>
+  <div class="modal-body">
+    <strong class="text-danger"> Are You Sure Delete?</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+    <button type="submit" class="btn btn-outline-danger" (click)="DeleteBook()"><i class="fa fa-trash"></i></button>
+    <!--      (click)="modal.close('Save click')"-->
+  </div>
+</ng-template>
+<!--  end modal-->
+<!--  delete model-->
+<ng-template #update let-modal class="modal fade">
+  <div class="modal-header">
+    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>
+  </div>
+  <div class="modal-body">
+    <form class="mt-3" [formGroup]="updateForm">
+      <div class="form-group">
+          <input placeholder="စာအုပ်အမည်" class="form-control" formControlName="name">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="စာရေးဆရာအမည်" class="form-control" formControlName="author">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="စာအုပ်အကြိမ်ရေ" class="form-control" formControlName="edition">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="စျေးနှုန်း" class="form-control" formControlName="price">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="ISBN" class="form-control" formControlName="isbn">
+      </div>
+      <hr>
+      <div class="form-group float-right">
+        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          close
+        </button> &nbsp;
+        <button type="submit" class="btn btn-outline-success" (click)="UpdateBook()">Update</button>
+        <!--      (click)="modal.close('Save click')"-->
+      </div>
+    </form>
+  </div>
+
+</ng-template>
+<!--  end modal-->
+</body>
+<script></script>
+</html>
